@@ -8,7 +8,7 @@ import pandas
 import numpy
 from tqdm import tqdm
 from cogent3.util.misc import open_, get_format_suffixes
-from cogent3 import LoadTable
+from cogent3 import make_table
 
 
 __author__ = 'Gavin Huttley'
@@ -241,7 +241,7 @@ def summary_stat_table(table, factors):
     for col in fscore_cols:
         header.extend([f'mean_{col}', f'std_{col}'])
 
-    table = LoadTable(header=header, rows=rows)
+    table = make_table(header=header, data=rows)
     table = table.sorted(reverse='mean_auc')
     return table
 

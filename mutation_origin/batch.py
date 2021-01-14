@@ -10,7 +10,7 @@ filterwarnings("ignore", ".*is ill-defined.*")
 import click
 import pandas
 from tqdm import tqdm
-from cogent3 import LoadTable
+from cogent3 import make_table
 from cogent3.util import parallel
 from mutation_origin.cli import (sample_data as mutori_sample,
                                  lr_train as mutori_lr_train,
@@ -556,7 +556,7 @@ def collate(base_path, output_path, exclude_paths, overwrite):
 
     columns = sorted(keys)
     rows = list(map(lambda r: [r.get(c, None) for c in columns], records))
-    table = LoadTable(header=columns, rows=rows)
+    table = make_table(header=columns, data=rows)
     table = table.sorted(reverse="auc")
     table = table.with_new_column("name",
                                   lambda x: model_name_from_features(*x),
